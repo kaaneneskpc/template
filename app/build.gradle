@@ -1,0 +1,91 @@
+import buildSrc.main.java.base.gradle.Config
+import buildSrc.main.java.base.gradle.Dependencies
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-android'
+    id 'com.google.dagger.hilt.android'
+}
+apply from: "${rootProject.projectDir}/flavors.gradle"
+
+android {
+    namespace Config.namespace
+    compileSdk Config.compileSdk
+
+    defaultConfig {
+        applicationId Config.applicationId
+        minSdk Config.minSdk
+        targetSdk Config.targetSdk
+        versionCode Config.versionCode
+        versionName Config.versionName
+
+        testInstrumentationRunner Config.testInstrumentationRunner
+    }
+
+    with flavorConfig
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+
+            applicationIdSuffix ".debug"
+
+        }
+
+        release {
+            debuggable false
+            minifyEnabled false
+            shrinkResources false
+
+            applicationIdSuffix ""
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            file('proguard').listFiles().each { proguardFile it }
+        }
+    }
+
+    viewBinding.enabled = true
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget =  JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+
+    implementation Dependencies.Ktx.coreKtx
+    implementation Dependencies.Android.appCompat
+    implementation Dependencies.Android.material
+    implementation Dependencies.Android.constraintLayout
+    implementation Dependencies.Android.activity
+
+    testImplementation Dependencies.Test.junit4
+    androidTestImplementation Dependencies.Test.extJunit
+    androidTestImplementation Dependencies.Test.espresso
+
+    implementation Dependencies.DebugTools.timber
+    implementation Dependencies.DebugTools.chucker
+
+    implementation Dependencies.Dagger.hilt
+    kapt Dependencies.Dagger.hiltCompiler
+
+    implementation Dependencies.Navigation.navigationFragment
+    implementation Dependencies.Navigation.navigationUi
+
+
+    implementation Dependencies.WebServices.gson
+    implementation Dependencies.WebServices.retrofit
+    implementation Dependencies.WebServices.okHttpBom
+    implementation Dependencies.WebServices.okHttp
+    implementation Dependencies.WebServices.okHttpLogging
+    implementation Dependencies.WebServices.retrofitGsonConverter
+    implementation Dependencies.Image.glide
+}

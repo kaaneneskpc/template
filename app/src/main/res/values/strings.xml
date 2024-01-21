@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">BaseApplication</string>
+    <string name="ok">Tamam</string>
+    <string name="close">Kapat</string>
+    <string name="warning">Hata</string>
+    <string name="success">Başarılı</string>
+    <string name="confirm">Onayla</string>
+    <string name="cancel">Vazgeç</string>
+    <string name="process_success">İşlem Onayı</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="progress_title">İşlem Title</string>
+    <string name="progress_text">İşlem Text</string>
+    <string name="profile">Profil</string>
+    <string name="dashboard">Ana Sayfa</string>
+    <string name="users">Kullanıcılar</string>
+</resources>

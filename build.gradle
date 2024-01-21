@@ -1,0 +1,30 @@
+import buildSrc.main.java.base.gradle.Dependencies
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://developer.huawei.com/repo/' }
+    }
+
+    dependencies {
+        classpath Dependencies.Plugins.androidPlugin
+        classpath Dependencies.Plugins.kotlinPlugin
+        classpath Dependencies.Plugins.hiltPlugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
